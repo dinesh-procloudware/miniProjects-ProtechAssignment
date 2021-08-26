@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        window.addEventListener("load",() => {
+    let long;
+    let lag;
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            var lat = position.coords.latitude;
+            console.log("::LAt",lat)
+            var long = position.coords.longitude;
+            console.log("::lat",long);
+            lat_long = "lat=" + `${lat}` + "&lon=" + `${long}`;
+            console.log("::LONGLATE",lat_long);
+         //   const api = 
+            fetch('https://api.openweathermap.org/data/2.5/forecast/daily?'+lat_long+'&appid=a51fb660edcce864cac526abb9967d7f')
+                .then((response) => {
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("::::::",data);
+                        var list = data.list;
+                        for (var i of list) {
+                        console.log(i);
+                       
+                    }
+                })
+        })
+    }
+})
+    </script>
+</body>
+</html>
